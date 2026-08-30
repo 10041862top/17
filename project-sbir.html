@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>經濟部 SBIR 專案 | AI Apply Skill</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=2">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.0/umd/lucide.min.js"></script>
+</head>
+<body>
+    <div class="bg-glow"></div>
+    <div class="bg-glow-2"></div>
+    
+    <nav class="navbar glass">
+        <div class="nav-container">
+            <div class="logo">
+                <i data-lucide="zap" class="logo-icon"></i>
+                <a href="index.html" style="color: inherit; text-decoration: none;">AI Apply Skill</a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">返回首頁</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="project-header fade-in-up">
+            <a href="index.html#platforms" class="back-btn"><i data-lucide="arrow-left"></i> 回到平台列表</a>
+            <div class="badge glass">補助上限 1,200 萬</div>
+            <h1 class="gradient-text">經濟部 SBIR 中小企業創新研發計畫</h1>
+            <p class="hero-desc" style="margin: 0 auto;">此分頁展示 AI-APPLY 在「升級模式」下，針對 SBIR 計畫自動產出的調研分析、計畫書預覽與自動填表腳本。</p>
+        </div>
+
+        <div class="content-grid">
+            <!-- 1. 調研與分析 -->
+            <div class="content-card glass fade-in-up">
+                <h2><i data-lucide="search"></i> 階段一：深度調研與競品分析</h2>
+                <p>AI 自動抓取最新的 SBIR 規範，並根據您的產品自動產生競品比較矩陣與創新點分析。</p>
+                <table class="mock-table">
+                    <thead>
+                        <tr>
+                            <th>評估維度</th>
+                            <th>您的產品 (自動帶入)</th>
+                            <th>市場競品 A</th>
+                            <th>AI 建議切入點 (創新指標)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>技術核心</td>
+                            <td>AI 語意分析引擎</td>
+                            <td>傳統關鍵字比對</td>
+                            <td>強調 <strong>LLM 微調技術</strong>在特定領域的準確率提升</td>
+                        </tr>
+                        <tr>
+                            <td>商業模式</td>
+                            <td>SaaS 訂閱制</td>
+                            <td>買斷制軟體</td>
+                            <td>結合 <strong>雲端經濟</strong> 與 <strong>ESG 無紙化</strong> 效益</td>
+                        </tr>
+                        <tr>
+                            <td>計畫期程</td>
+                            <td>12 個月</td>
+                            <td>-</td>
+                            <td>符合 SBIR Phase 2 要求，建議分 4 期查核</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 2. 申請文件撰寫 -->
+            <div class="content-card glass fade-in-up delay-1">
+                <h2><i data-lucide="pen-tool"></i> 階段二：AI 智慧文件撰寫</h2>
+                <p>根據上述調研結果，AI 已為您生成標準的 SBIR 計畫書大綱與核心段落預覽。</p>
+                
+                <div class="document-preview">
+                    <h3>【附件一】創新研發計畫書 (草案)</h3>
+                    <p><strong>壹、 計畫摘要</strong></p>
+                    <p>本計畫旨在開發具備高度語意理解能力之「次世代 AI 智慧客服引擎」，以解決現有中小企業在客服人力短缺及服務品質不一之痛點。透過導入開源大型語言模型（LLM）並進行在地化領域微調，預期能將客服回應準確率提升至 95% 以上。</p>
+                    <p><strong>貳、 創新性說明</strong></p>
+                    <ul>
+                        <li><strong>技術創新：</strong>採用 RAG (檢索增強生成) 架構，解決傳統 LLM 幻覺問題。</li>
+                        <li><strong>服務創新：</strong>提供中小型電商隨插即用之 API，降低技術導入門檻。</li>
+                    </ul>
+                    <p><em>(此為 AI 自動生成之預覽段落，完整 20 頁計畫書已自動建檔)</em></p>
+                </div>
+            </div>
+
+            <!-- 3. 自動填表 -->
+            <div class="content-card glass fade-in-up delay-2">
+                <h2><i data-lucide="clipboard-check"></i> 階段三：自動填表執行</h2>
+                <p>啟動 Playwright / Computer Use 腳本，將您的基本資料與計畫摘要自動登錄至 SBIR 官方送件系統。</p>
+                <div class="code-window">
+                    <div class="window-header">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <div class="window-body">
+                        <pre><code><span class="keyword">▶</span> 啟動 SBIR 自動化填表程序...
+<span class="comment"># 正在連線至 https://www.sbir.org.tw/ ...</span>
+<span class="success">[OK]</span> 成功登入系統 (Token 驗證通過)
+<span class="success">[OK]</span> 填入公司基本資料: user-profile.yaml
+<span class="success">[OK]</span> 填入計畫名稱: 次世代 AI 智慧客服引擎開發計畫
+<span class="success">[OK]</span> 上傳計畫書 PDF 檔... 成功!
+<span class="success">[OK]</span> 經費預算表已自動化轉換填入
+
+<span class="keyword">&gt;</span> 填表完成 (耗時: 45秒)。等待人工最終確認送出。</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <i data-lucide="zap" class="logo-icon"></i> AI Apply Skill
+            </div>
+            <p>開源釋出・MIT License</p>
+        </div>
+    </footer>
+
+    <script src="script.js?v=2"></script>
+</body>
+</html>

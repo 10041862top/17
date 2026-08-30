@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>政府採購與標案 | AI Apply Skill</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=2">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.0/umd/lucide.min.js"></script>
+</head>
+<body>
+    <div class="bg-glow"></div>
+    <div class="bg-glow-2"></div>
+    
+    <nav class="navbar glass">
+        <div class="nav-container">
+            <div class="logo">
+                <i data-lucide="zap" class="logo-icon"></i>
+                <a href="index.html" style="color: inherit; text-decoration: none;">AI Apply Skill</a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">返回首頁</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="project-header fade-in-up">
+            <a href="index.html#platforms" class="back-btn"><i data-lucide="arrow-left"></i> 回到平台列表</a>
+            <div class="badge glass">政府電子採購網整合</div>
+            <h1 class="gradient-text">政府標案服務建議書 (RFP)</h1>
+            <p class="hero-desc" style="margin: 0 auto;">此分頁展示 AI-APPLY 如何透過 g0v pcc API 自動追蹤標案，並快速產出符合政府公文與採購規範的服務建議書。</p>
+        </div>
+
+        <div class="content-grid">
+            <div class="content-card glass fade-in-up">
+                <h2><i data-lucide="search"></i> 階段一：招標文件規格分析</h2>
+                <p>AI 自動解析 PDF/Word 招標規範，萃取「評選配分表」與「需求規格」，確保完全不漏項。</p>
+                <table class="mock-table">
+                    <thead>
+                        <tr>
+                            <th>招標需求項目</th>
+                            <th>評選權重</th>
+                            <th>我方對應之解決方案</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>資訊系統資訊安全規範 (資安檢測)</td>
+                            <td>20%</td>
+                            <td>承諾取得 ISO27001 認證並附上第三方弱點掃描報告</td>
+                        </tr>
+                        <tr>
+                            <td>專案管理與時程控管能力</td>
+                            <td>30%</td>
+                            <td>導入敏捷開發 (Agile) 搭配雙週 Sprint 交付機制</td>
+                        </tr>
+                        <tr>
+                            <td>創新與加值服務</td>
+                            <td>15%</td>
+                            <td>免費提供 3 個月的 AI 智慧客服模組作為加值</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="content-card glass fade-in-up delay-1">
+                <h2><i data-lucide="pen-tool"></i> 階段二：AI 智慧文件撰寫</h2>
+                <p>產出極具政府公文風格，且架構嚴謹的「服務建議書」。</p>
+                
+                <div class="document-preview">
+                    <h3>【服務建議書】○○部公文電子交換系統升級案</h3>
+                    <p><strong>第一章、 專案概述與整體架構</strong></p>
+                    <p>本團隊深知貴部針對「公文電子交換系統」在效能與資安上之迫切需求。本建議書提出基於微服務架構之高可用性 (High Availability) 解決方案，確保公文交換之零時差與零掉單。</p>
+                    <p><strong>第二章、 專案時程與查核點</strong></p>
+                    <ul>
+                        <li><strong>第一階段 (第 1-30 日)：</strong>完成系統需求訪談與規格確認 (簽署 SD 文件)。</li>
+                        <li><strong>第二階段 (第 31-90 日)：</strong>完成核心交換模組開發與封閉測試 (UAT)。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-card glass fade-in-up delay-2">
+                <h2><i data-lucide="clipboard-check"></i> 階段三：自動填表執行</h2>
+                <p>整合標案規格，自動填寫線上投標系統與相關電子表單。</p>
+                <div class="code-window">
+                    <div class="window-header">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <div class="window-body">
+                        <pre><code><span class="keyword">▶</span> 啟動 政府採購網自動化投標準備...
+<span class="success">[OK]</span> 解析標案案號: 1120000XXX
+<span class="success">[OK]</span> 下載招標文件清單確認 (共 7 份附件)
+<span class="success">[OK]</span> 自動產出: 投標廠商聲明書、切結書 (PDF 填表完成)
+<span class="success">[OK]</span> 建立服務建議書裝訂目錄與頁碼檢核
+
+<span class="keyword">&gt;</span> 招標文件包裝完畢，請進行工商憑證電子簽章即可上傳！</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <i data-lucide="zap" class="logo-icon"></i> AI Apply Skill
+            </div>
+            <p>開源釋出・MIT License</p>
+        </div>
+    </footer>
+
+    <script src="script.js?v=2"></script>
+</body>
+</html>
