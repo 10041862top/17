@@ -1,27 +1,34 @@
-// Initialize Lucide icons
-lucide.createIcons();
-
-// Intersection Observer for scroll animations
 document.addEventListener("DOMContentLoaded", () => {
+    // Initialize Lucide icons
+    try {
+        lucide.createIcons();
+    } catch (e) {
+        console.error("Lucide error:", e);
+    }
+
     const observerOptions = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.15
+        threshold: 0.1
     };
 
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                // Optional: Stop observing once animated to keep it visible
-                // observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    // Select all elements with fade-in-up class
     const elements = document.querySelectorAll('.fade-in-up');
-    elements.forEach(el => observer.observe(el));
+    elements.forEach(el => {
+        observer.observe(el);
+        // Fallback: If element is already in viewport on load, make it visible immediately
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight) {
+            el.classList.add('visible');
+        }
+    });
 
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -33,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const targetElement = document.querySelector(targetId);
             if(targetElement) {
                 window.scrollTo({
-                    top: targetElement.offsetTop - 80, // Adjust for fixed navbar
+                    top: targetElement.offsetTop - 80,
                     behavior: 'smooth'
                 });
             }
