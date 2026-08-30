@@ -1,0 +1,81 @@
+name: Update Knowledge Base
+
+on:
+  schedule:
+    # 每週一 09:00 台灣時間（UTC+8）= 週一 01:00 UTC
+    - cron: '0 1 * * 1'
+  workflow_dispatch:  # 允許手動觸發
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: tools/requirements-scraper.txt
+
+      - name: Install dependencies
+        run: pip install -r tools/requirements-scraper.txt
+
+      - name: Run knowledge updater
+        run: python tools/update-knowledge.py
+        env:
+          PYTHONUNBUFFERED: '1'
+
+      - name: Check for changes
+        id: any_changes
+        run: |
+          if git diff --quiet -- knowledge/; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            git diff --stat -- knowledge/
+          fi
+
+      - name: Commit and push
+        if: steps.any_changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add knowledge/competition-platforms.md knowledge/UPCOMING.md
+          git commit -m "chore: 自動更新知識庫 [$(date '+%Y-%m-%d')]"
+          git push
+
+      - name: Create weekly notification issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DATE=$(date '+%Y-%m-%d')
+          TITLE="📋 ${DATE} 本週補助／競賽機會更新"
+
+          # 確保 label 存在
+          gh label create "weekly-update" --color "0075ca" --description "每週自動更新通知" --repo ${{ github.repository }} 2>/dev/null || true
+
+          # 讀取 UPCOMING.md 內容（最多 60000 字元，避免超過 GitHub 上限）
+          BODY=$(head -c 60000 knowledge/UPCOMING.md)
+
+          # 關閉上週的同類 issue（避免積累）
+          gh issue list \
+            --repo ${{ github.repository }} \
+            --label "weekly-update" \
+            --state open \
+            --json number \
+            --jq '.[].number' \
+          | xargs -I{} gh issue close {} --repo ${{ github.repository }} 2>/dev/null || true
+
+          # 開新 issue
+          gh issue create \
+            --repo ${{ github.repository }} \
+            --title "$TITLE" \
+            --body "$BODY" \
+            --label "weekly-update"
