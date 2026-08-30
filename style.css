@@ -494,3 +494,166 @@ body {
     background: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.4);
 }
+
+/* Rich Document Formatting (The Spear & Shield) */
+.doc-a4-container {
+    background: white;
+    color: #1e293b;
+    padding: 3rem 4rem;
+    font-family: 'Noto Serif TC', 'Inter', serif;
+    line-height: 1.8;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    border-radius: 4px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.doc-a4-container h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #0f172a;
+    border-bottom: 2px solid #3b82f6;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.doc-a4-container h3 {
+    color: #1e40af;
+    font-size: 1.4rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid #3b82f6;
+    padding-left: 0.75rem;
+}
+
+.doc-a4-container h4 {
+    color: #334155;
+    font-size: 1.1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.doc-a4-container p {
+    margin-bottom: 1rem;
+    text-align: justify;
+}
+
+.doc-a4-container ul, .doc-a4-container ol {
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+.doc-a4-container li {
+    margin-bottom: 0.5rem;
+}
+
+.highlight-box {
+    background: #f1f5f9;
+    border-left: 4px solid #f59e0b;
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.highlight-box.danger {
+    border-left-color: #ef4444;
+    background: #fef2f2;
+}
+
+.doc-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.doc-table th, .doc-table td {
+    border: 1px solid #cbd5e1;
+    padding: 0.75rem 1rem;
+    text-align: left;
+}
+
+.doc-table th {
+    background: #f8fafc;
+    color: #0f172a;
+    font-weight: 600;
+}
+
+/* SWOT Matrix */
+.swot-matrix {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 2rem 0;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.swot-box {
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.swot-box h4 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.swot-s { background: #f0fdf4; border-color: #bbf7d0; }
+.swot-s h4 { color: #166534; }
+.swot-w { background: #fef2f2; border-color: #fecaca; }
+.swot-w h4 { color: #991b1b; }
+.swot-o { background: #eff6ff; border-color: #bfdbfe; }
+.swot-o h4 { color: #1e40af; }
+.swot-t { background: #fffbeb; border-color: #fde68a; }
+.swot-t h4 { color: #92400e; }
+
+/* Score Gauge */
+.score-container {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    background: #f8fafc;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+}
+
+.score-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: conic-gradient(#10b981 var(--score), #e2e8f0 0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.score-circle::after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: #f8fafc;
+    border-radius: 50%;
+}
+
+.score-text {
+    position: relative;
+    z-index: 1;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #0f172a;
+    font-family: 'Inter', sans-serif;
+}
+
+.score-details h4 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: #0f172a;
+}
