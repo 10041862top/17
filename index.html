@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Apply 控制台 | 全自動補助與競賽輔助系統</title>
+    <!-- 加入時間戳記避免快取 -->
+    <title>AI Apply 控制台 | 真實計畫書產生器</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="stylesheet" href="style.css?v=4">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.0/umd/lucide.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
     <div class="bg-glow"></div>
@@ -22,40 +24,30 @@
             
             <div class="sidebar-nav">
                 <div class="nav-group">
-                    <div class="nav-title">政府補助計畫</div>
-                    <a href="#" class="nav-item active" data-id="sbir">
-                        <i data-lucide="landmark"></i> 經濟部 SBIR
-                    </a>
-                    <a href="#" class="nav-item" data-id="ai-plus">
-                        <i data-lucide="microchip"></i> 經濟部 AI+ 計畫
-                    </a>
-                    <a href="#" class="nav-item" data-id="digiplus">
-                        <i data-lucide="cloud"></i> DIGITAL+ 創新補助
-                    </a>
-                    <a href="#" class="nav-item" data-id="siir">
-                        <i data-lucide="store"></i> SIIR 服務業創新
-                    </a>
+                    <div class="nav-title">補助類平台</div>
+                    <a href="#" class="nav-item active" data-id="sbir-central"><i data-lucide="landmark"></i> 經濟部 SBIR</a>
+                    <a href="#" class="nav-item" data-id="sbir-local"><i data-lucide="map-pin"></i> 全台地方型 SBIR</a>
+                    <a href="#" class="nav-item" data-id="ai-plus"><i data-lucide="microchip"></i> 經濟部 AI+ 計畫</a>
+                    <a href="#" class="nav-item" data-id="digiplus"><i data-lucide="cloud"></i> DIGITAL+ 創新補助</a>
+                    <a href="#" class="nav-item" data-id="siir"><i data-lucide="store"></i> SIIR 服務業創新</a>
+                    <a href="#" class="nav-item" data-id="moc"><i data-lucide="palette"></i> 文化部各項補助</a>
+                    <a href="#" class="nav-item" data-id="nstc"><i data-lucide="flask-conical"></i> 國科會計畫補助</a>
+                    <a href="#" class="nav-item" data-id="sme"><i data-lucide="building"></i> 中小及新創企業署</a>
+                    <a href="#" class="nav-item" data-id="smepass"><i data-lucide="plane"></i> G2B 企業得來速</a>
                 </div>
 
                 <div class="nav-group">
-                    <div class="nav-title">競賽與新創</div>
-                    <a href="#" class="nav-item" data-id="startup">
-                        <i data-lucide="trophy"></i> 台灣新創競技場
-                    </a>
+                    <div class="nav-title">競賽與新創類</div>
+                    <a href="#" class="nav-item" data-id="bounty"><i data-lucide="target"></i> 獎金獵人</a>
+                    <a href="#" class="nav-item" data-id="startup"><i data-lucide="rocket"></i> Startup Terrace</a>
+                    <a href="#" class="nav-item" data-id="qitc"><i data-lucide="cpu"></i> 高通創新競賽 (QITC)</a>
                 </div>
 
                 <div class="nav-group">
-                    <div class="nav-title">政府採購標案</div>
-                    <a href="#" class="nav-item" data-id="tender">
-                        <i data-lucide="briefcase"></i> 政府電子採購網
-                    </a>
+                    <div class="nav-title">政府標案類</div>
+                    <a href="#" class="nav-item" data-id="pcc"><i data-lucide="briefcase"></i> 政府電子採購網</a>
+                    <a href="#" class="nav-item" data-id="g0v-pcc"><i data-lucide="code"></i> g0v pcc API 整合</a>
                 </div>
-            </div>
-            
-            <div class="sidebar-footer">
-                <a href="https://github.com/10041862top/17" target="_blank" class="btn-primary-sm" style="width: 100%; text-align: center; display: block;">
-                    <i data-lucide="github"></i> GitHub Repo
-                </a>
             </div>
         </aside>
 
@@ -66,23 +58,41 @@
                 <div class="status-badge" id="project-status"><span class="dot green"></span> 就緒</div>
             </header>
 
-            <div class="action-panel glass">
+            <!-- User Input Form for Real Generation -->
+            <div class="input-panel glass">
                 <div class="action-header">
-                    <h2><i data-lucide="cpu"></i> AI 自動化控制面板</h2>
-                    <p>請依序點擊下方按鈕，執行全自動申請流程。</p>
+                    <h2><i data-lucide="settings"></i> 專案基礎設定 (必填)</h2>
+                    <p>請輸入您的專案資訊，系統將為您自動生成 14 種不同的計畫書/企劃書。</p>
                 </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>公司/團隊名稱</label>
+                        <input type="text" id="input-company" placeholder="例如：阿法科技股份有限公司" value="阿法科技有限公司">
+                    </div>
+                    <div class="form-group">
+                        <label>產品/服務名稱</label>
+                        <input type="text" id="input-product" placeholder="例如：次世代 AI 智慧客服系統" value="AI 智能排班與預測系統">
+                    </div>
+                    <div class="form-group full-width">
+                        <label>核心技術與痛點解決 (簡述)</label>
+                        <textarea id="input-features" rows="3" placeholder="例如：透過 LLM 技術解決客服人力短缺，提供 24 小時不間斷服務，準確率達 95%。">運用機器學習演算法預測餐飲業客流，並結合雲端 SaaS 平台提供自動化員工排班服務，解決餐飲業排班耗時及人力浪費痛點。</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-panel glass">
                 <div class="action-buttons">
                     <button class="action-btn" id="btn-research">
                         <i data-lucide="search"></i>
-                        <span>啟動調研分析</span>
+                        <span>1. 啟動調研分析</span>
                     </button>
                     <button class="action-btn" id="btn-write" disabled>
                         <i data-lucide="pen-tool"></i>
-                        <span>產出申請文件</span>
+                        <span>2. 產出申請文件</span>
                     </button>
                     <button class="action-btn" id="btn-fill" disabled>
                         <i data-lucide="play-circle"></i>
-                        <span>執行自動填表</span>
+                        <span>3. 執行自動填表</span>
                     </button>
                 </div>
             </div>
@@ -91,7 +101,7 @@
                 <!-- Research View -->
                 <div class="result-view" id="view-research" style="display: none;">
                     <div class="view-header">
-                        <h3><i data-lucide="bar-chart-2"></i> 深度調研與競品分析結果</h3>
+                        <h3><i data-lucide="bar-chart-2"></i> 競品分析與調研矩陣</h3>
                         <div class="timestamp">AI 生成於 <span class="current-time"></span></div>
                     </div>
                     <div class="view-body" id="content-research">
@@ -99,11 +109,14 @@
                     </div>
                 </div>
 
-                <!-- Writing View -->
+                <!-- Writing View (Real Document) -->
                 <div class="result-view" id="view-write" style="display: none;">
                     <div class="view-header">
-                        <h3><i data-lucide="file-text"></i> AI 智慧文件撰寫預覽</h3>
-                        <div class="timestamp">AI 生成於 <span class="current-time"></span></div>
+                        <h3><i data-lucide="file-text"></i> <span id="doc-title-display">產出之文件</span></h3>
+                        <div class="view-actions">
+                            <button id="btn-copy" class="btn-outline-sm"><i data-lucide="copy"></i> 複製全文</button>
+                            <button id="btn-download" class="btn-outline-sm"><i data-lucide="download"></i> 匯出 TXT</button>
+                        </div>
                     </div>
                     <div class="view-body document-preview" id="content-write">
                         <!-- Rendered by JS -->
@@ -132,6 +145,6 @@
         </main>
     </div>
 
-    <script src="script.js?v=3"></script>
+    <script src="script.js?v=4"></script>
 </body>
 </html>
