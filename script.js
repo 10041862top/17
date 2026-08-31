@@ -1,5 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-    lucide.createIcons();
+    try {
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    } catch(e) {
+        console.warn("Icons could not be loaded", e);
+    }
 
     const PLATFORMS = {
         'sbir-central': { title: '經濟部 SBIR 中小企業創新研發計畫', focus: '技術研發與創新護城河' },
@@ -19,7 +25,12 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     let currentProject = 'sbir-central';
-    let apiKey = localStorage.getItem('gemini_api_key') || '';
+    let apiKey = '';
+    try {
+        apiKey = localStorage.getItem('gemini_api_key') || '';
+    } catch (e) {
+        console.warn("localStorage is not available", e);
+    }
 
     // UI Elements
     const navItems = document.querySelectorAll('.nav-item');
@@ -62,7 +73,11 @@ document.addEventListener('DOMContentLoaded', () => {
     btnCancelModal.addEventListener('click', () => modal.style.display = 'none');
     btnSaveModal.addEventListener('click', () => {
         apiKey = inputApiKey.value.trim();
-        localStorage.setItem('gemini_api_key', apiKey);
+        try {
+            localStorage.setItem('gemini_api_key', apiKey);
+        } catch (e) {
+            console.warn("localStorage setItem failed", e);
+        }
         if(apiKey) {
             projectStatus.innerHTML = '<span class="dot green"></span> 真實 API 已連線';
         } else {
