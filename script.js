@@ -1,157 +1,30 @@
 document.addEventListener('DOMContentLoaded', () => {
     lucide.createIcons();
 
-    // --- Dynamic Generator Engine (最強的矛與盾) ---
-    // Platforms Metadata
     const PLATFORMS = {
-        'sbir-central': { title: '經濟部 SBIR 中小企業創新研發計畫', type: 'grant', focus: '技術護城河與專利', score: 92 },
-        'sbir-local': { title: '全台地方型 SBIR', type: 'grant', focus: '在地產業連結與就業', score: 88 },
-        'ai-plus': { title: '經濟部 AI+ 計畫', type: 'grant', focus: '良率提升與雙軸轉型', score: 95 },
-        'digiplus': { title: 'DIGITAL+ 數位服務創新補助', type: 'grant', focus: 'SaaS 訂閱與雲端架構', score: 91 },
-        'siir': { title: 'SIIR 服務業創新研發', type: 'grant', focus: 'O2O 體驗與減碳', score: 85 },
-        'moc': { title: '文化部各項補助', type: 'grant', focus: '文化底蘊與科技藝術', score: 78 },
-        'nstc': { title: '國科會計畫補助', type: 'grant', focus: '產學合作與前瞻學理', score: 82 },
-        'sme': { title: '中小及新創企業署', type: 'grant', focus: '企業體質升級與財務', score: 89 },
-        'smepass': { title: 'G2B 企業得來速', type: 'grant', focus: '跨部會資源整合', score: 90 },
-        'bounty': { title: '獎金獵人 Bounty Hunter', type: 'contest', focus: '創意落地與 PoC', score: 80 },
-        'startup': { title: 'Startup Terrace', type: 'contest', focus: '國際化佈局與募資', score: 86 },
-        'qitc': { title: '高通創新競賽 (QITC)', type: 'contest', focus: '邊緣運算與 5G 應用', score: 88 },
-        'pcc': { title: '政府電子採購網', type: 'tender', focus: '資安規範與專案管理', score: 94 },
-        'g0v-pcc': { title: 'g0v pcc API 整合', type: 'tender', focus: '開源架構與開放資料', score: 87 }
+        'sbir-central': { title: '經濟部 SBIR 中小企業創新研發計畫', focus: '技術研發與創新護城河' },
+        'sbir-local': { title: '全台地方型 SBIR', focus: '在地產業升級與連結' },
+        'ai-plus': { title: '經濟部 AI+ 計畫', focus: 'AI 技術導入與雙軸轉型' },
+        'digiplus': { title: 'DIGITAL+ 創新補助', focus: 'SaaS 訂閱與雲端架構' },
+        'siir': { title: 'SIIR 服務業創新', focus: 'O2O 體驗與服務流程創新' },
+        'moc': { title: '文化部各項補助', focus: '文化底蘊與科技藝術結合' },
+        'nstc': { title: '國科會計畫補助', focus: '產學合作與前瞻學理突破' },
+        'sme': { title: '中小及新創企業署', focus: '企業體質升級與財務規模化' },
+        'smepass': { title: 'G2B 企業得來速', focus: '跨部會資源整合與行政優化' },
+        'bounty': { title: '獎金獵人', focus: '創意落地與 PoC 實證' },
+        'startup': { title: 'Startup Terrace', focus: '國際化佈局與募資潛力' },
+        'qitc': { title: '高通創新競賽 (QITC)', focus: '邊緣運算與 5G 應用' },
+        'pcc': { title: '政府電子採購網', focus: '資安規範與專案管理能力' },
+        'g0v-pcc': { title: 'g0v pcc API 整合', focus: '開源架構與開放資料應用' }
     };
 
-    // 最強的矛 (Research Engine)
-    function generateSpear(platformId, comp, prod, feat) {
-        const pData = PLATFORMS[platformId];
-        return `
-            <div class="doc-a4-container" style="padding: 2rem;">
-                <h2>【${pData.title}】深度調研與法規分析報告</h2>
-                
-                <div class="score-container">
-                    <div class="score-circle" style="--score: ${pData.score}%">
-                        <div class="score-text">${pData.score}</div>
-                    </div>
-                    <div class="score-details">
-                        <h4>計畫匹配度極高</h4>
-                        <p>經 AI 語意分析，「${prod}」之核心技術高度契合本計畫<strong>【${pData.focus}】</strong>之審查重點。建議立即啟動投件作業。</p>
-                    </div>
-                </div>
-
-                <h3><i data-lucide="crosshair"></i> 動態 SWOT 競爭力矩陣</h3>
-                <div class="swot-matrix">
-                    <div class="swot-box swot-s">
-                        <h4><i data-lucide="trending-up"></i> 優勢 (Strengths)</h4>
-                        <ul>
-                            <li>${feat.substring(0, 30)}... 具備高度技術獨特性。</li>
-                            <li>「${comp}」擁有先發優勢與靈活的開發團隊。</li>
-                        </ul>
-                    </div>
-                    <div class="swot-box swot-w">
-                        <h4><i data-lucide="trending-down"></i> 劣勢 (Weaknesses)</h4>
-                        <ul>
-                            <li>現階段品牌知名度尚待建立。</li>
-                            <li>需補足符合政府規範之 ISO/資安查核文件。</li>
-                        </ul>
-                    </div>
-                    <div class="swot-box swot-o">
-                        <h4><i data-lucide="sun"></i> 機會 (Opportunities)</h4>
-                        <ul>
-                            <li>政府正大力推動【${pData.focus}】相關產業升級。</li>
-                            <li>傳統競品尚未完全導入 AI 數位轉型。</li>
-                        </ul>
-                    </div>
-                    <div class="swot-box swot-t">
-                        <h4><i data-lucide="cloud-lightning"></i> 威脅 (Threats)</h4>
-                        <ul>
-                            <li>潛在大型 SI 廠商可能挾帶資本優勢進入市場。</li>
-                            <li>開源技術快速迭代導致的技術折舊風險。</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <h3><i data-lucide="shield-alert"></i> 審查委員視角 (紅軍分析)</h3>
-                <div class="highlight-box danger">
-                    <strong>⚠️ 潛在被攻擊的弱點：</strong><br>
-                    委員可能會質疑「${prod}」的商業模式是否具備可持續性 (Sustainability)。<br><br>
-                    <strong>🛡️ 防禦話術建議：</strong><br>
-                    在計畫書中必須明確列出 TAM (總潛在市場) 的 Top-down 推估數據，並強調初期已與至少 3 家先期測試客戶 (PoC) 簽署合作意向書 (MOU)，以佐證商業化能力。
-                </div>
-            </div>
-        `;
-    }
-
-    // 最強的盾 (Document Engine)
-    function generateShield(platformId, comp, prod, feat) {
-        const pData = PLATFORMS[platformId];
-        
-        let docType = "計畫書";
-        if(pData.type === 'contest') docType = "Pitch Deck 講稿與企劃";
-        if(pData.type === 'tender') docType = "服務建議書 (RFP)";
-
-        return `
-            <div class="doc-a4-container">
-                <h2>【${pData.title}】<br>${prod} - ${docType}</h2>
-                <div style="text-align: center; color: #64748b; margin-bottom: 3rem;">
-                    申請單位：${comp} <br>
-                    文件機密等級：限閱 (Confidential)
-                </div>
-
-                <h3>壹、 計畫摘要 (Executive Summary)</h3>
-                <p>在全球數位轉型與淨零碳排的雙重浪費下，各行各業正面臨前所未有的挑戰。本計畫由「${comp}」發起，傾注核心研發量能，旨在開發具備高度競爭力之「${prod}」。</p>
-                <p>為響應【${pData.title}】之政策宗旨，本專案將針對<strong>【${pData.focus}】</strong>進行深度優化。我們的核心優勢在於：${feat}。透過此項破壞式創新，預期能為產業帶來典範轉移 (Paradigm Shift)，並大幅提升我國於該領域之國際競爭力。</p>
-
-                <h3>貳、 產業痛點與市場規模 (Market Analysis)</h3>
-                <p>目前市場上現有的解決方案多半存在架構老舊、擴充性差、且缺乏 AI 賦能等缺陷。這導致終端使用者往往需要耗費大量無效工時。</p>
-                <div class="highlight-box">
-                    <strong>市場規模推估 (TAM/SAM/SOM)：</strong><br>
-                    經本團隊市調，該領域之全球潛在市場 (TAM) 達 500 億美金；鎖定之亞太區服務可達市場 (SAM) 約為 80 億美金；本計畫初期 3 年內預計取得之可獲得市場 (SOM) 為 1.5 億台幣，具備極高之商業變現潛力。
-                </div>
-
-                <h3>參、 創新技術與智財權佈局 (Innovation & IP)</h3>
-                <p>本專案之所以能夠超越競品，在於我們並非單純整合現有 API，而是從底層架構進行重新設計。</p>
-                <table class="doc-table">
-                    <thead>
-                        <tr>
-                            <th>傳統解決方案</th>
-                            <th>本專案 (${prod}) 之技術創新</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>單機版或地端部署，維護成本高</td>
-                            <td>雲原生的微服務 (Microservices) 架構，支援自動擴容</td>
-                        </tr>
-                        <tr>
-                            <td>人工參數調整，缺乏自適應能力</td>
-                            <td>導入機器學習 (ML) 動態演算法，準確率隨數據量自我提升</td>
-                        </tr>
-                        <tr>
-                            <td>缺乏資安防護機制</td>
-                            <td>符合 ISO27001 規範之零信任 (Zero Trust) 安全架構</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h3>肆、 實施期程與查核點 (Milestones)</h3>
-                <p>本專案預計為期 12 個月，分為三個主要階段進行敏捷開發與驗證：</p>
-                <ol>
-                    <li><strong>第一階段 (M1-M4)：核心引擎開發與雛形建置。</strong><br>預期查核點：完成系統架構設計書 (SD) 並釋出 Alpha 版。</li>
-                    <li><strong>第二階段 (M5-M8)：封閉測試與資安驗證。</strong><br>預期查核點：完成第三方弱點掃描，並邀請 5 家種子客戶進行 UAT 測試。</li>
-                    <li><strong>第三階段 (M9-M12)：商轉佈局與行銷推廣。</strong><br>預期查核點：系統正式上線 (GA)，並達成首批 100 萬營收目標。</li>
-                </ol>
-
-                <h3>伍、 預期效益與退場機制 (Benefits & Risks)</h3>
-                <p>本計畫之成功將帶來顯著之量化與質化效益。在量化方面，預計創造 5 名高階研發就業機會，並衍生至少 3,000 萬之相關投資；在質化方面，將有效協助產業上下游完成數位升級。</p>
-                <p><strong>風險控管：</strong>若遭遇技術瓶頸或市場變遷，本團隊已備妥 Plan B。模組化的系統設計允許我們快速 Pivot 至其他垂直領域，將研發沉沒成本降至最低。</p>
-            </div>
-        `;
-    }
-
     let currentProject = 'sbir-central';
+    let apiKey = localStorage.getItem('gemini_api_key') || '';
 
     // UI Elements
     const navItems = document.querySelectorAll('.nav-item');
     const projectTitle = document.getElementById('project-title');
+    const projectStatus = document.getElementById('project-status');
     const btnResearch = document.getElementById('btn-research');
     const btnWrite = document.getElementById('btn-write');
     const btnFill = document.getElementById('btn-fill');
@@ -164,111 +37,204 @@ document.addEventListener('DOMContentLoaded', () => {
     const contentWrite = document.getElementById('content-write');
     const contentFill = document.getElementById('content-fill');
     
-    const docTitleDisplay = document.getElementById('doc-title-display');
-    const btnCopy = document.getElementById('btn-copy');
-    const btnDownload = document.getElementById('btn-download');
-
-    // Input Elements
     const inCompany = document.getElementById('input-company');
     const inProduct = document.getElementById('input-product');
     const inFeatures = document.getElementById('input-features');
 
-    function getCurrentTime() {
-        return new Date().toLocaleTimeString('zh-TW', { hour12: false });
+    // Modal Elements
+    const modal = document.getElementById('settings-modal');
+    const btnSettings = document.getElementById('btn-settings');
+    const btnCloseModal = document.getElementById('btn-close-modal');
+    const btnCancelModal = document.getElementById('btn-cancel-modal');
+    const btnSaveModal = document.getElementById('btn-save-modal');
+    const inputApiKey = document.getElementById('input-api-key');
+
+    // Init Modal
+    inputApiKey.value = apiKey;
+    if(apiKey) {
+        projectStatus.innerHTML = '<span class="dot green"></span> 真實 API 已連線';
+    } else {
+        projectStatus.innerHTML = '<span class="dot red"></span> 未設定 API 金鑰';
     }
+
+    btnSettings.addEventListener('click', () => modal.style.display = 'flex');
+    btnCloseModal.addEventListener('click', () => modal.style.display = 'none');
+    btnCancelModal.addEventListener('click', () => modal.style.display = 'none');
+    btnSaveModal.addEventListener('click', () => {
+        apiKey = inputApiKey.value.trim();
+        localStorage.setItem('gemini_api_key', apiKey);
+        if(apiKey) {
+            projectStatus.innerHTML = '<span class="dot green"></span> 真實 API 已連線';
+        } else {
+            projectStatus.innerHTML = '<span class="dot red"></span> 未設定 API 金鑰';
+        }
+        modal.style.display = 'none';
+    });
 
     function resetViews() {
         viewResearch.style.display = 'none';
         viewWrite.style.display = 'none';
         viewFill.style.display = 'none';
-        
-        btnResearch.classList.remove('active');
         btnResearch.disabled = false;
-        
-        btnWrite.classList.remove('active');
-        btnWrite.disabled = true;
-        
-        btnFill.classList.remove('active');
+        btnWrite.disabled = false;
         btnFill.disabled = true;
     }
 
-    // Handle Navigation
     navItems.forEach(item => {
         item.addEventListener('click', (e) => {
             e.preventDefault();
             navItems.forEach(n => n.classList.remove('active'));
             item.classList.add('active');
-            
             currentProject = item.getAttribute('data-id');
             projectTitle.textContent = PLATFORMS[currentProject].title;
-            
             resetViews();
         });
     });
 
-    // Step 1: Research (The Spear)
-    btnResearch.addEventListener('click', () => {
+    async function callGemini(promptText, container) {
+        if (!apiKey) {
+            container.innerHTML = `
+                <div class="highlight-box danger">
+                    <strong>⚠️ 錯誤：未設定 API Key</strong><br>
+                    為了進行真實 AI 運算，請先點擊左下角「系統設定」輸入您的 Google Gemini API Key。
+                </div>
+            `;
+            return false;
+        }
+
+        try {
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=\${apiKey}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text: promptText }] }],
+                    generationConfig: { temperature: 0.7, topK: 40, topP: 0.95 }
+                })
+            });
+
+            if (!response.ok) {
+                const err = await response.json();
+                throw new Error(err.error?.message || 'API Request Failed');
+            }
+
+            const data = await response.json();
+            const resultText = data.candidates[0].content.parts[0].text;
+            container.innerHTML = marked.parse(resultText);
+            return true;
+        } catch (error) {
+            container.innerHTML = `
+                <div class="highlight-box danger">
+                    <strong>⚠️ AI 呼叫失敗：</strong><br>
+                    \${error.message}<br>
+                    請檢查您的 API Key 是否正確或額度是否耗盡。
+                </div>
+            `;
+            return false;
+        }
+    }
+
+    // Step 1: Real Research (The Spear)
+    btnResearch.addEventListener('click', async () => {
         btnResearch.disabled = true;
-        btnResearch.classList.add('active');
         viewResearch.style.display = 'block';
         contentResearch.innerHTML = `
             <div class="loader-container">
                 <div class="spinner"></div>
-                <p>最強的矛啟動：正在進行深網法規與競品調研...</p>
+                <p>最強的矛啟動中：正在呼叫 Google Gemini API 進行真實推理，請稍候約 10 秒...</p>
             </div>
         `;
         
-        setTimeout(() => {
-            const comp = inCompany.value || '測試公司';
-            const prod = inProduct.value || '測試產品';
-            const feat = inFeatures.value || '強大的AI技術';
-            
-            contentResearch.innerHTML = generateSpear(currentProject, comp, prod, feat);
-            lucide.createIcons();
-            viewResearch.querySelector('.current-time').textContent = getCurrentTime();
-            btnWrite.disabled = false;
-        }, 1800);
+        const pData = PLATFORMS[currentProject];
+        const prompt = `
+您是一位台灣資深政府補助與投標顧問。
+目前有一家公司「\${inCompany.value}」，其產品為「\${inProduct.value}」。
+核心特點：「\${inFeatures.value}」。
+
+該公司正打算申請/投標「\${pData.title}」。該計畫/標案的審查重點是「\${pData.focus}」。
+請為此專案進行深度的「調研與法規分析報告」，請務必使用 Markdown 格式輸出，並包含以下標題與內容：
+
+## 計畫匹配度分析
+（給出 1 到 100 分的匹配分數，並解釋原因，點出加分關鍵）
+
+## 動態 SWOT 競爭力矩陣
+（請以表格或條列式，針對該產品在該計畫中的 Strengths, Weaknesses, Opportunities, Threats 進行深度剖析）
+
+## 潛在競品情報
+（虛擬 2~3 家可能在市場上的競品，並比較我方護城河）
+
+## 審查委員視角 (Red Team Analysis)
+（用最嚴苛的標準，預判委員可能會攻擊的痛點，並直接給予防禦話術建議）
+`;
+
+        await callGemini(prompt, contentResearch);
+        btnResearch.disabled = false;
     });
 
-    // Step 2: Write (The Shield)
-    btnWrite.addEventListener('click', () => {
+    // Step 2: Real Write (The Shield)
+    btnWrite.addEventListener('click', async () => {
         btnWrite.disabled = true;
-        btnWrite.classList.add('active');
         viewWrite.style.display = 'block';
-        contentWrite.innerHTML = `<div class="typing-cursor">最強的盾啟動：正在組裝萬字級計畫書與自動排版...</div>`;
-        docTitleDisplay.textContent = `${PLATFORMS[currentProject].title} - 自動產出文件`;
-        
-        setTimeout(() => {
-            const comp = inCompany.value || '測試公司';
-            const prod = inProduct.value || '測試產品';
-            const feat = inFeatures.value || '強大的AI技術';
-            
-            contentWrite.innerHTML = generateShield(currentProject, comp, prod, feat);
-            lucide.createIcons();
-            btnFill.disabled = false;
-        }, 2500);
+        contentWrite.innerHTML = `
+            <div class="loader-container">
+                <div class="spinner"></div>
+                <p>最強的盾啟動中：正在由 Gemini API 為您即時撰寫長篇專業文件，請稍候約 15 秒...</p>
+            </div>
+        `;
+        document.getElementById('doc-title-display').textContent = `${PLATFORMS[currentProject].title} - 真實產出文件`;
+
+        const pData = PLATFORMS[currentProject];
+        const prompt = `
+您是一位台灣資深政府計畫書/企劃書撰寫專家。
+請為公司「\${inCompany.value}」的產品「\${inProduct.value}」撰寫一份用於申請「\${pData.title}」的長篇專業計畫書/企劃書大綱。
+產品痛點與核心技術：「\${inFeatures.value}」。
+請注意，該計畫特別看重「\${pData.focus}」，請在文中大力強調此面向。
+
+這份文件必須極度專業、長篇，像是由頂尖顧問所撰寫。請務必使用 Markdown 格式輸出，必須包含以下章節，並為每個章節撰寫豐富的內容與推演數據：
+
+# 【\${pData.title}】專案企劃書：\${inProduct.value}
+
+## 壹、 計畫摘要
+（至少 300 字，包含背景、痛點、解方與預期效益）
+
+## 貳、 產業痛點與市場規模 (TAM/SAM/SOM)
+（請合理推估數據，展現龐大的商業潛力）
+
+## 參、 創新技術與智財權佈局
+（請使用 Markdown 表格，對比傳統解決方案與本專案的創新技術，至少列出 3 個技術特點）
+
+## 肆、 商業模式與營收預測
+（說明獲利模式，以及未來 3 年的營收成長預估）
+
+## 伍、 實施期程與查核點
+（將計畫分為三到四個階段，列出查核點與具體 KPI）
+
+## 陸、 預算編列與資金運用
+（說明資金如何分配於研發、行銷、營運等項目）
+
+## 柒、 風險控管與退場機制
+（列出技術、市場、法規風險，並給出具體應對策略）
+`;
+
+        const success = await callGemini(prompt, contentWrite);
+        btnWrite.disabled = false;
+        if(success) btnFill.disabled = false;
     });
 
-    // Step 3: Fill Form
+    // Step 3: Mock Fill
     btnFill.addEventListener('click', () => {
         btnFill.disabled = true;
-        btnFill.classList.add('active');
         viewFill.style.display = 'block';
         contentFill.innerHTML = '';
         
-        const comp = inCompany.value || '測試公司';
-        const pData = PLATFORMS[currentProject];
         const lines = [
             `▶ 系統呼叫 Selenium/Playwright 底層填表引擎...`,
-            `▶ 目標入口：[${pData.title}] 官方申請系統`,
+            `▶ 目標入口：[\${PLATFORMS[currentProject].title}] 官方申請系統`,
             `# 載入工商憑證與驗證碼繞過模組...`,
-            `[OK] 成功登入系統 (認證通過: ${comp})`,
-            `[OK] 讀取「最強的盾」產出之長篇計畫書資料結構`,
+            `[OK] 成功登入系統`,
+            `[OK] 讀取「最強的盾」產出之 markdown 文件，進行 DOM 解析與自動貼上`,
             `[OK] 將【計畫摘要】寫入表單欄位 (字數檢核通過)`,
-            `[OK] 將【預算編列】轉換為機關專用之 Excel 格式並自動上傳`,
-            `[OK] 自動勾選所有法規切結書與聲明條款 (符合【最強的矛】之法規調研)`,
-            ``,
-            `> 所有資料登打完畢，防禦滴水不漏，進度 100%！等待最後人工送出。`
+            `[OK] 將【預算編列】轉換為機關專用格式並自動上傳`,
+            `> 所有資料登打完畢，等待最後人工送出。`
         ];
         let lineIdx = 0;
         
@@ -276,46 +242,41 @@ document.addEventListener('DOMContentLoaded', () => {
             if (lineIdx < lines.length) {
                 const line = lines[lineIdx];
                 let formattedLine = line;
-                if (line.startsWith('▶')) formattedLine = `<span class="keyword">${line}</span>`;
-                else if (line.startsWith('#')) formattedLine = `<span class="comment">${line}</span>`;
+                if (line.startsWith('▶')) formattedLine = `<span class="keyword">\${line}</span>`;
+                else if (line.startsWith('#')) formattedLine = `<span class="comment">\${line}</span>`;
                 else if (line.includes('[OK]')) formattedLine = line.replace('[OK]', '<span class="success">[OK]</span>');
-                else if (line.startsWith('>')) formattedLine = `<span class="keyword">${line}</span>`;
+                else if (line.startsWith('>')) formattedLine = `<span class="keyword">\${line}</span>`;
                 
                 contentFill.innerHTML += formattedLine + '<br>';
                 lineIdx++;
-                
                 const windowBody = contentFill.parentElement;
                 windowBody.scrollTop = windowBody.scrollHeight;
-                
                 setTimeout(typeLine, Math.random() * 300 + 100);
             }
         }
-        
         typeLine();
     });
 
-    // Copy Button
-    btnCopy.addEventListener('click', () => {
+    // Copy / Download logic remains the same
+    document.getElementById('btn-copy').addEventListener('click', () => {
         const text = contentWrite.innerText;
         navigator.clipboard.writeText(text).then(() => {
-            const originalText = btnCopy.innerHTML;
-            btnCopy.innerHTML = `<i data-lucide="check"></i> 已複製！`;
-            lucide.createIcons();
-            setTimeout(() => {
-                btnCopy.innerHTML = originalText;
-                lucide.createIcons();
-            }, 2000);
+            alert('已複製到剪貼簿！');
         });
     });
 
-    // Download Button
-    btnDownload.addEventListener('click', () => {
-        const text = contentWrite.innerText;
-        const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    document.getElementById('btn-download').addEventListener('click', () => {
+        const text = contentWrite.innerHTML;
+        const htmlDoc = `
+        <html><head><meta charset="utf-8"><title>匯出文件</title>
+        <style>body{font-family:sans-serif; line-height:1.6; padding:2rem; max-width:800px; margin:0 auto;} table{border-collapse:collapse;width:100%;margin:1rem 0} th,td{border:1px solid #ccc;padding:0.5rem}</style>
+        </head><body>\${text}</body></html>
+        `;
+        const blob = new Blob([htmlDoc], { type: 'text/html;charset=utf-8' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `${PLATFORMS[currentProject].title}_完整申請文件.txt`;
+        a.download = `\${PLATFORMS[currentProject].title}_完整申請文件.html`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
