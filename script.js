@@ -220,41 +220,45 @@ document.addEventListener('DOMContentLoaded', () => {
         if(success) btnFill.disabled = false;
     });
 
-    // Step 3: Mock Fill
+    // Step 3: Real Auto-Fill View
     btnFill.addEventListener('click', () => {
         btnFill.disabled = true;
+        btnFill.classList.add('active');
         viewFill.style.display = 'block';
-        contentFill.innerHTML = '';
         
-        const lines = [
-            `▶ 系統呼叫 Selenium/Playwright 底層填表引擎...`,
-            `▶ 目標入口：[\${PLATFORMS[currentProject].title}] 官方申請系統`,
-            `# 載入工商憑證與驗證碼繞過模組...`,
-            `[OK] 成功登入系統`,
-            `[OK] 讀取「最強的盾」產出之 markdown 文件，進行 DOM 解析與自動貼上`,
-            `[OK] 將【計畫摘要】寫入表單欄位 (字數檢核通過)`,
-            `[OK] 將【預算編列】轉換為機關專用格式並自動上傳`,
-            `> 所有資料登打完畢，等待最後人工送出。`
-        ];
-        let lineIdx = 0;
-        
-        function typeLine() {
-            if (lineIdx < lines.length) {
-                const line = lines[lineIdx];
-                let formattedLine = line;
-                if (line.startsWith('▶')) formattedLine = `<span class="keyword">\${line}</span>`;
-                else if (line.startsWith('#')) formattedLine = `<span class="comment">\${line}</span>`;
-                else if (line.includes('[OK]')) formattedLine = line.replace('[OK]', '<span class="success">[OK]</span>');
-                else if (line.startsWith('>')) formattedLine = `<span class="keyword">\${line}</span>`;
-                
-                contentFill.innerHTML += formattedLine + '<br>';
-                lineIdx++;
-                const windowBody = contentFill.parentElement;
-                windowBody.scrollTop = windowBody.scrollHeight;
-                setTimeout(typeLine, Math.random() * 300 + 100);
-            }
+        // Ensure the correct target portal link is displayed
+        const targetLink = document.getElementById('target-portal-link');
+        if (currentProject === 'ai-plus') {
+            targetLink.href = "https://eii.nat.gov.tw/moeai-plus/apply";
+            targetLink.textContent = "https://eii.nat.gov.tw/moeai-plus/apply";
+        } else {
+            targetLink.href = "#";
+            targetLink.textContent = `[${PLATFORMS[currentProject].title}] 的官方申請系統`;
         }
-        typeLine();
+    });
+
+    // Download AI Document (.txt)
+    document.getElementById('btn-download-doc').addEventListener('click', () => {
+        const text = contentWrite.innerText;
+        const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `ai_generated_document.txt`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    });
+
+    // Download Python Script (.py)
+    document.getElementById('btn-download-py').addEventListener('click', () => {
+        const a = document.createElement('a');
+        a.href = "autofill.py";
+        a.download = "autofill.py";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
     });
 
     // Copy / Download logic remains the same
